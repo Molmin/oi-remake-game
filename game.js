@@ -220,7 +220,7 @@ const contestConfigs = {
     timePoints: 3,
     isIOI: true
   }
-  
+
 };
 
 // 从指定难度区间随机选择一道题目
@@ -241,8 +241,8 @@ function selectProblemFromRange(minLevel, maxLevel) {
 
   // 随机选择一道题目
   const selectedProblem = availableProblems[Math.floor(Math.random() * availableProblems.length)];
-  
-  
+
+
   return selectedProblem;
 }
 
@@ -250,7 +250,7 @@ function selectProblemFromRange(minLevel, maxLevel) {
 function createSubmitAnswerProblem(level) {
   // 根据难度调整初始最大分数范围
   const initialMaxScore = Math.max(0, Math.min(100, 30 + level * 5));
-  
+
   // 创建提交答案题目
   return {
     name: "提交答案题",
@@ -291,17 +291,17 @@ function selectIOIProblemFromRange(minLevel, maxLevel, limitParts) {
 
   // 随机选择一道题目
   const selectedProblem = availableProblems[Math.floor(Math.random() * availableProblems.length)];
-  
-  
+
+
   // 创建一个问题的副本，以便我们可以修改它
   const problem = JSON.parse(JSON.stringify(selectedProblem));
-  
+
   // 限制问题的特定部分
   if (problem && problem.parts) {
     // 处理每个部分分
     for (let i = 0; i < problem.parts.length; i++) {
       const part = problem.parts[i];
-      
+
       // 如果 ds 部分大于 5，则限制为 5
       if (part.ds && part.ds > 5) {
         if (part.coding) {
@@ -311,7 +311,7 @@ function selectIOIProblemFromRange(minLevel, maxLevel, limitParts) {
         }
         part.ds = 5;
       }
-      
+
       // 如果 combinatorics 部分大于 5，增加 construction 而不是 combinatorics
       if (part.combinatorics && part.combinatorics > 5) {
         if (part.construction) {
@@ -321,7 +321,7 @@ function selectIOIProblemFromRange(minLevel, maxLevel, limitParts) {
         }
         part.combinatorics = 0;
       }
-      
+
       // 如果 polynomial 部分大于 0，则设置为 0
       if (part.polynomial && part.polynomial > 0) {
         part.polynomial = 0;
@@ -332,7 +332,7 @@ function selectIOIProblemFromRange(minLevel, maxLevel, limitParts) {
         part.dp += part.string;
         part.string = 0;
       }
-      
+
       // 如果 gametheory 部分大于 0，增加到 construction 和 thinking
       if (part.gametheory && part.gametheory > 0) {
         if (part.construction) {
@@ -345,7 +345,7 @@ function selectIOIProblemFromRange(minLevel, maxLevel, limitParts) {
       }
     }
   }
-  
+
   // 如果限制部分数量，则创建新对象
   if (limitParts && problem.parts.length > limitParts) {
     return {
@@ -353,7 +353,7 @@ function selectIOIProblemFromRange(minLevel, maxLevel, limitParts) {
       parts: problem.parts.slice(0, limitParts)
     };
   }
-  
+
   return problem;
 }
 
@@ -501,10 +501,10 @@ const eventSystem = {
       description: "在其他人摸鱼摆烂的时候，你却在偷偷学习。这样的学习方式也许会带来一些效果？你其实并不知道，你只是觉得在其他人休息的时候学习，会更有动力。这也是你引以为傲的一点。",
       options: [
         { text: "偷学被同学发现，被迫中断学习", effects: { mood: -1 } },
-        { text: "偷学了一些线性代数", effects: { linearalgebra: 1, mood : -1 } },
-        { text: "偷学了一些计算几何", effects: { geometry: 1, mood : -1 } },
-        { text: "偷学了一些字符串", effects: { string: 1, mood : -1 } },
-        { text: "偷学了一些文化课", effects: { culture: 1, mood : -1 } }
+        { text: "偷学了一些线性代数", effects: { linearalgebra: 1, mood: -1 } },
+        { text: "偷学了一些计算几何", effects: { geometry: 1, mood: -1 } },
+        { text: "偷学了一些字符串", effects: { string: 1, mood: -1 } },
+        { text: "偷学了一些文化课", effects: { culture: 1, mood: -1 } }
       ],
       optionsToShow: 1
     },
@@ -548,7 +548,7 @@ const eventSystem = {
       title: "出游",
       description: "竞赛生都是一些死宅，即使有空的时间也都是待在机房里。然而机房的气氛确实比较压抑，而且平时你也没有时间出去走走，那为什么不去感受一下外面的世界呢？",
       options: [
-        { text: "你偶然遇上黄昏和晚霞：在另一个我不学 OI 的世界里，我此时会在做什么？", effects: {mood: -1} },
+        { text: "你偶然遇上黄昏和晚霞：在另一个我不学 OI 的世界里，我此时会在做什么？", effects: { mood: -1 } },
         { text: "你在湖边的咖啡厅遇到了一位学长，你回心转意决定跟他学习一会", effects: {}, nextEvent: "偷学" },
         { text: "原本只想开开心心地溜达，怎料天下大雨，你被淋成了落汤鸡", effects: { mood: -2 } },
         { text: "后来你才知道：生活不只眼前的 OI，还有诗和远方", effects: { mood: 1 } }
@@ -722,7 +722,7 @@ const eventSystem = {
         { text: "虽然很垃圾但也就这样，这不会影响什么事", effects: {} },
         { text: "这是不是我的问题？如果真正的比赛也是这样的，那我该怎么办？", effects: {}, nextEvent: "焦虑" },
         { text: "我再也不会笑了", effects: { determination: -300 } },
-        { text: "做这场比赛不如去看奶龙大战暴暴龙", effects: { determination: -500 } }, 
+        { text: "做这场比赛不如去看奶龙大战暴暴龙", effects: { determination: -500 } },
         { text: "出题人，****", effects: { determination: -1000 } }
       ],
       optionsToShow: 1
@@ -783,11 +783,11 @@ const eventSystem = {
     "UCup": {
       title: "Universal Cup",
       description: "你参加了一场 Universal Cup 比赛...",
-      
+
       options: [
         {
           text: "我要去找个队友，一起参赛",
-          effects: {mood: 2},
+          effects: { mood: 2 },
           nextEventProbability: {
             "好比赛": 0.5,
             "正常比赛": 0.35,
@@ -796,7 +796,7 @@ const eventSystem = {
         },
         {
           text: "我要来单挑 ucup，努力加训",
-          effects: {coding: 1},
+          effects: { coding: 1 },
           nextEventProbability: {
             "好比赛": 0.5,
             "正常比赛": 0.35,
@@ -815,7 +815,7 @@ const eventSystem = {
       options: [
         {
           text: "我要去找个队友，一起参赛",
-          effects: {mood: 3},
+          effects: { mood: 3 },
           nextEventProbability: {
             "好比赛": 0.4,
             "正常比赛": 0.5,
@@ -824,7 +824,7 @@ const eventSystem = {
         },
         {
           text: "我要来单挑 PTZ Camp，努力加训",
-          effects: {coding: 1},
+          effects: { coding: 1 },
           nextEventProbability: {
             "好比赛": 0.4,
             "正常比赛": 0.5,
@@ -863,11 +863,11 @@ const eventSystem = {
       title: "学会zhoukangyang",
       description: "你学会了zhoukangyang的博客，你惊讶的发现，原来OI还可以这么有趣，你决定以后多学习学习他的博客。",
       options: [
-        { text: "得到提升", effects: { thinking : 2 } },
-        { text: "得到提升", effects: { thinking : 1, dp : 2 } },
-        { text: "得到提升", effects: { thinking : 1, graph : 2 } },
-        { text: "得到提升", effects: { thinking : 1, numbertheory : 4 } },
-        { text: "得到提升", effects: { thinking : 1, ds : 2 } },
+        { text: "得到提升", effects: { thinking: 2 } },
+        { text: "得到提升", effects: { thinking: 1, dp: 2 } },
+        { text: "得到提升", effects: { thinking: 1, graph: 2 } },
+        { text: "得到提升", effects: { thinking: 1, numbertheory: 4 } },
+        { text: "得到提升", effects: { thinking: 1, ds: 2 } },
       ],
       optionsToShow: 1
     },
@@ -875,9 +875,9 @@ const eventSystem = {
       title: "学会skip2004",
       description: "你学会了skip2004的博客，发现了很多写代码的小技巧，现在你充满了力量！！",
       options: [
-        { text: "得到提升", effects: { coding : 1 } },
-        { text: "得到提升", effects: { ds : 2 } },
-        { text: "得到提升", effects: { carefulness : 1 } },
+        { text: "得到提升", effects: { coding: 1 } },
+        { text: "得到提升", effects: { ds: 2 } },
+        { text: "得到提升", effects: { carefulness: 1 } },
       ],
       optionsToShow: 1
     },
@@ -925,7 +925,7 @@ const eventSystem = {
         { text: "得到提升", effects: { numbertheory: 4 } },
         { text: "得到提升", effects: { linearalgebra: 4 } },
         { text: "得到提升", effects: { polynomial: 4 } },
-        
+
 
       ],
 
@@ -935,7 +935,7 @@ const eventSystem = {
       title: "学会号妈培训",
       description: "你阅读了号妈培训的博客，感慨到：铜鼓我的努力，我也可以变得比他们更加厉害。",
       options: [
-        { text: "得到提升", effects: { determination: 1000, mood : 1 } },
+        { text: "得到提升", effects: { determination: 1000, mood: 1 } },
       ],
     },
     "学会djq_cpp": {
@@ -981,14 +981,14 @@ const eventSystem = {
       options: [
         {
           text: "阅读 Elegia 的博客",
-          getNextEventProbability: function() {
+          getNextEventProbability: function () {
             // 基础成功率为0.1，每点polynomial属性、linearalgebra 属性与 combinatorics 属性 增加0.05的成功率，最高0.7
             const baseSuccessRate = 0.1;
             const polynomialBonus = Math.min(0.6, (playerStats.polynomial || 0) * 0.05);
             const linearalgebraBonus = Math.min(0.6, (playerStats.linearalgebra || 0) * 0.05);
             const combinatoricsBonus = Math.min(0.6, (playerStats.combinatorics || 0) * 0.05);
             const successRate = Math.min(0.7, baseSuccessRate + polynomialBonus + linearalgebraBonus + combinatoricsBonus);
-            
+
             return {
               "看不懂": 1 - successRate,
               "学会Elegia": successRate
@@ -1018,12 +1018,12 @@ const eventSystem = {
         },
         {
           text: "阅读 dottle 的博客",
-          getNextEventProbability: function() {
+          getNextEventProbability: function () {
             // 基础成功率为0.5，每点文化课属性增加 0.1，最高0.95
             const baseSuccessRate = 0.5;
             const cultureBonus = Math.min(0.95, (playerStats.culture || 0) * 0.1);
             const successRate = Math.min(0.95, baseSuccessRate + cultureBonus);
-            
+
             return {
               "看不懂": 1 - successRate,
               "学会dottle": successRate
@@ -1134,14 +1134,15 @@ const eventSystem = {
       title: "UOJ",
       description: "你参加了一场 UOJ 比赛...",
       options: [
-        { 
+        {
           text: "认真打好每一题，必须全神贯注！",
           effects: { carefulness: 1 },
           nextEventProbability: {
             "好比赛": 0.55,
             "正常比赛": 0.3,
             "烂比赛": 0.15
-          } },
+          }
+        },
         { text: "随便做做，别把 rating 看的太重了", effects: { thinking: 1 } },
         { text: "你发现第一题做不出来，放弃也会掉分", effects: { mood: -1 } }
       ],
@@ -1188,7 +1189,7 @@ const eventSystem = {
       title: "UOJ 管理员招募",
       description: "你听说 UOJ 正在招募下一届管理员！刚好，作为获得了保送资格的集训队选手，你有充分多的时间参与 UOJ 的管理工作。你想要成为 UOJ 的管理员吗？",
       options: [
-        { text: "成为管理员", effects: { }, nextEvent: "UOJ管理员", description: "成为 UOJ 管理员" },
+        { text: "成为管理员", effects: {}, nextEvent: "UOJ管理员", description: "成为 UOJ 管理员" },
         { text: "不感兴趣", effects: {} },
       ],
     },
@@ -1466,7 +1467,7 @@ function updateStatus() {
     'hard': '#ffc107',    // 黄色
     'expert': '#dc3545'   // 红色
   };
-  document.getElementById("player-stats-panel").querySelector("h3").innerHTML = 
+  document.getElementById("player-stats-panel").querySelector("h3").innerHTML =
     `玩家属性 <br> <span style="color: ${difficultyColors[gameDifficulty]}; font-size: 0.9em;">[${difficultyNames[gameDifficulty]}难度]</span>`;
 
 
@@ -1588,31 +1589,31 @@ function updateSubProblems() {
   }
 
   const subProblemList = subProblems[currentProblem - 1];
-  
+
   // 检查是否是提交答案题（通过检查问题属性）
   const currentProblemIndex = currentProblem - 1;
   const currentProblemObj = problems[currentProblemIndex];
   const isSubmitAnswerProblem = currentProblemObj && currentProblemObj.isSubmitAnswer;
-  
+
   if (isSubmitAnswerProblem) {
     // 提交答案题的特殊处理 - 只有一个提交按钮
     const subProblemDiv = document.createElement("div");
     subProblemDiv.className = "sub-problem";
-    
+
     // 获取当前最高分
     const currentHighestScore = isCodeComplete[currentProblemIndex][0] ? subProblems[currentProblemIndex][0].score : 0;
-    
+
     subProblemDiv.innerHTML = `
                 <h4>提交答案题 (最高分数: 100)</h4>
                 <p>这是一道提交答案题，每次提交会获得一个随机分数。</p>
                 <button class="btn purple" onclick="submitAnswerProblem(${currentProblemIndex})" ${timePoints > 0 ? '' : 'disabled'}>提交答案 (消耗1个时间点)</button>
                 <p>当前最高得分: <span style="color: green;">${currentHighestScore}</span></p>
             `;
-    
+
     subProblemPanel.appendChild(subProblemDiv);
     return;
   }
-  
+
   // 原有的非提交答案题处理逻辑
   subProblemList.forEach((subProblem, index) => {
     const subProblemDiv = document.createElement("div");
@@ -1623,12 +1624,12 @@ function updateSubProblems() {
     const attributes = [];
     // 计算经验值影响的概率 (0-100%)
     const revealProbability = Math.min(Math.sqrt(playerStats.experience) * 25, 100);
-    
+
     // 检查是否应该根据经验值显示属性，即使题目是模糊的
     const shouldRevealAttribute = () => {
       return Math.random() * 100 <= revealProbability;
     };
-    
+
     if (subProblem.dp > 0) attributes.push(`<span title="需要动态规划相关知识，数值越高难度越大">动态规划: ${(subProblem.blur && thinkProgress[currentProblem - 1][index] < calculateThinkTime(subProblem) && !shouldRevealAttribute()) ? '?' : subProblem.dp}</span>`);
     if (subProblem.ds > 0) attributes.push(`<span title="需要数据结构相关知识，数值越高难度越大">数据结构: ${(subProblem.blur && thinkProgress[currentProblem - 1][index] < calculateThinkTime(subProblem) && !shouldRevealAttribute()) ? '?' : subProblem.ds}</span>`);
     if (subProblem.string > 0) attributes.push(`<span title="需要字符串算法相关知识，数值越高难度越大">字符串: ${(subProblem.blur && thinkProgress[currentProblem - 1][index] < calculateThinkTime(subProblem) && !shouldRevealAttribute()) ? '?' : subProblem.string}</span>`);
@@ -1675,7 +1676,7 @@ function calculateThinkTime(subProblem) {
   thinkTime += Math.pow(Math.max(0, (subProblem.construction || 0) - mapAttributeValue(playerStats.construction || 0)), 2);
   thinkTime += Math.pow(Math.max(0, (subProblem.polynomial || 0) - mapAttributeValue(playerStats.polynomial || 0)), 2);
   thinkTime += Math.pow(Math.max(0, (subProblem.numbertheory || 0) - mapAttributeValue(playerStats.numbertheory || 0)), 2);
- 
+
   thinkTime += Math.max(0, subProblem.ds - mapAttributeValue(playerStats.ds));
   thinkTime += Math.max(0, subProblem.string - mapAttributeValue(playerStats.string));
 
@@ -1717,7 +1718,7 @@ function calculateCodeTime(subProblem) {
 function calculateThinkSuccessRate(subProblem) {
   // 根据难度调整基础成功率
   let baseProb;
-  switch(gameDifficulty) {
+  switch (gameDifficulty) {
     case 'cheat':
       baseProb = 0.99; // 简单难度90%基础成功率
       break;
@@ -1736,7 +1737,7 @@ function calculateThinkSuccessRate(subProblem) {
     default:
       baseProb = 0.8; // 默认80%基础成功率
   }
-  
+
   if (debugmode == true) return 1;
   // 思维能力影响（每差1点降低7.5%）
   baseProb -= Math.max(0, subProblem.thinking - mapAttributeValue(playerStats.thinking)) * 0.075;
@@ -1752,7 +1753,7 @@ function calculateThinkSuccessRate(subProblem) {
 function calculateCodeSuccessRate(subProblem) {
   // 根据难度调整基础成功率
   let baseProb;
-  switch(gameDifficulty) {
+  switch (gameDifficulty) {
     case 'cheat':
       baseProb = 0.99; // 简单难度90%基础成功率
       break;
@@ -1771,7 +1772,7 @@ function calculateCodeSuccessRate(subProblem) {
     default:
       baseProb = 0.8; // 默认80%基础成功率
   }
-  
+
   if (debugmode == true) return 1;
   // 心态影响（每差1点降低x^2%）
   baseProb -= Math.pow(Math.max(10 - mood, 0), 2) * 0.01;
@@ -1786,7 +1787,7 @@ function calculateCodeSuccessRate(subProblem) {
 function calculateErrorRate(subProblem) {
   // 根据难度调整基础出错概率
   let baseProb;
-  switch(gameDifficulty) {
+  switch (gameDifficulty) {
     case 'cheat':
       baseProb = 0.01; // 简单难度10%基础出错概率
       break;
@@ -1805,7 +1806,7 @@ function calculateErrorRate(subProblem) {
     default:
       baseProb = 0.2; // 默认20%基础出错概率
   }
-  
+
   if (debugmode == true) return 0;
   baseProb += subProblem.trap * 0.05; // 每个陷阱增加5%
   baseProb -= playerStats.carefulness * 0.03; // 每点细心降低3%
@@ -1817,7 +1818,7 @@ function proceedToAllocation() {
   document.getElementById("pre-story-panel").style.display = "none";
   document.getElementById("allocate-panel").style.display = "block";
   document.getElementById("log-panel").style.display = "none";
-  
+
   // 更新天赋点显示
   document.getElementById("remaining-points").textContent = remainingPoints;
   document.getElementById("remaining-ability-points").textContent = remainingAbilityPoints;
@@ -1984,7 +1985,7 @@ function confirmAllocation() {
   playerStats.construction = knowledgeValues.construction;
   playerStats.polynomial = knowledgeValues.polynomial;
   playerStats.numbertheory = knowledgeValues.numbertheory;
-  
+
   // 分配能力点
   playerStats.thinking = abilityValues.thinking;
   playerStats.coding = abilityValues.coding;
@@ -1992,7 +1993,7 @@ function confirmAllocation() {
   playerStats.experience = abilityValues.experience;
   playerStats.quickness = abilityValues.quickness;
   playerStats.mental = abilityValues.mental;
-  
+
   // 设置其他属性初始值为0
   playerStats.culture = 0;
 
@@ -2153,15 +2154,15 @@ function checkCodeSubProblem(problemIndex, subProblemIndex) {
   // 获取当前比赛配置
   const currentContest = Object.values(contestConfigs).find(config => config.name === currentContestName);
   const isIOIContest = currentContest && currentContest.isIOI;
-   
+
   const problem = problems[problemIndex];
-   
+
   // 如果是提交答案题，则调用专门的函数处理
   if (problem && problem.isSubmitAnswer) {
     submitAnswerProblem(problemIndex);
     return;
   }
-   
+
   if (!isIOIContest && timePoints <= 0) {
     alert("时间点不足！");
     return;
@@ -2175,13 +2176,13 @@ function checkCodeSubProblem(problemIndex, subProblemIndex) {
   } else if (!isIOIContest) {
     logEvent(`重新对拍，不消耗时间点`, 'check');
   }
-  
+
   lastActions.push('check');
   if (lastActions.length > 5) lastActions.shift();
 
   // 记录对拍/提交操作到日志
   logEvent(`${isIOIContest ? '提交' : '对拍'}第 ${problemIndex + 1} 题的第 ${subProblemIndex + 1} 个部分`, 'check');
-  
+
   // 获取当前部分分的错误率
   const errorRate = errorRates[problemIndex][subProblemIndex];
   const random = Math.random();
@@ -2886,15 +2887,15 @@ function startContest(contestType) {
 
   // 更新心态值并确保显示更新
   let moodDrop = extraMoodDrop; // 基础心态下降值
-  if (contestType == 'WC' || contestType == 'APIO' ) {
+  if (contestType == 'WC' || contestType == 'APIO') {
     moodDrop -= 1;
   }
   else if (contestType == 'NOIP' || contestType == '省选Day1') {
     moodDrop += 1;
   }
-  else if (contestType == 'NOI Day1'  || contestType == '省选Day2') {
+  else if (contestType == 'NOI Day1' || contestType == '省选Day2') {
     moodDrop += 2;
-  } 
+  }
   else if (contestType == 'NOI Day2') {
     moodDrop += 3;
   }
@@ -2907,7 +2908,7 @@ function startContest(contestType) {
   if (playerStats.mood > 14) {
     moodDrop += Math.floor((playerStats.mood - 14) / 2);
   }
-  
+
   if (playerStats.mental > 0) {
     moodDrop = Math.max(0, moodDrop - playerStats.mental); // 每点心理素质减少1点心态下降
   }
@@ -3259,7 +3260,7 @@ function showNextTrainingEvent() {
     } else if (currentEvent === 7) {
       eventType = "赛前一天";
     }
-  } 
+  }
   else if (currentPhase == 16) { // 第八次训练(8次)：【步入高二】【长期训练】【提升训练/比赛训练】【提升训练/比赛训练】【娱乐时间】【提升训练/比赛训练】【焦虑】【考前一天】
     if (currentEvent === 1) {
       eventType = "步入高二";
@@ -3274,14 +3275,14 @@ function showNextTrainingEvent() {
     } else if (currentEvent === 8) {
       eventType = "赛前一天";
     }
-  } 
+  }
   else if (totalTrainingEvents == 2) { // 2次训练：【焦虑】【考前一天】
     if (currentEvent === 1) {
       eventType = "焦虑";
     } else if (currentEvent === 2) {
       eventType = "赛前一天";
     }
-  } 
+  }
   else if (totalTrainingEvents == 4) { // 4次训练：【提升训练/比赛训练】【娱乐时间】【焦虑】【考前一天】
     if (currentEvent === 1) {
       eventType = Math.random() < 0.5 ? "提升训练" : "比赛训练";
@@ -3292,7 +3293,7 @@ function showNextTrainingEvent() {
     } else if (currentEvent === 4) {
       eventType = "赛前一天";
     }
-  } 
+  }
   else if (totalTrainingEvents == 5) { // 5次训练：【提升训练/比赛训练】【娱乐时间】【焦虑】【遗忘】【考前一天】
     if (currentEvent === 1) {
       eventType = Math.random() < 0.5 ? "提升训练" : "比赛训练";
@@ -3448,8 +3449,8 @@ function handlePhaseTransition() {
     logEvent("NOI Day1比赛即将开始...", 'event');
     currentPhase = 14;
     startContest("NOI Day1");
-    
-  } 
+
+  }
   else if (currentPhase === 14) {
     logEvent("第八次训练开始...", 'event');
     currentPhase = 15;
@@ -4156,23 +4157,23 @@ function submitAnswerProblem(problemIndex) {
     alert("时间点不足！");
     return;
   }
-  
+
   // 消耗时间点
   timePoints--;
-  
+
   // 获取当前题目
   const problem = problems[problemIndex];
   const subProblem = subProblems[problemIndex][0];
-  
-  
+
+
   // 生成随机分数 (0-100)
   let mean = problem.mean || 100;
   let variance = problem.variance || 1;
   let standardDev = Math.sqrt(variance);
-  
 
 
-  switch(gameDifficulty) {
+
+  switch (gameDifficulty) {
     case 'cheat':
       mean -= 0.5;
       break;
@@ -4189,7 +4190,7 @@ function submitAnswerProblem(problemIndex) {
       mean -= 4; // 专家难度降低3分
       break;
     default:
-      // 默认不降低
+    // 默认不降低
   }
 
   // 使用Box-Muller变换生成正态分布随机数（简单近似）
@@ -4204,21 +4205,21 @@ function submitAnswerProblem(problemIndex) {
     subProblem.score = randomScore;
     isCodeComplete[problemIndex][0] = true;
   }
-  
+
   // 记录提交到日志
   logEvent(`提交了第 ${problemIndex + 1} 题的答案`, 'check');
   logEvent(`消耗了 1 个时间点，剩余 ${timePoints} 个时间点`, 'check');
   logEvent(`本次提交得分: ${randomScore}`, 'check');
   logEvent(`当前最高得分: ${subProblem.score}`, 'check');
-  
+
   // 更新最近操作记录
   lastActions.push('check');
   if (lastActions.length > 5) lastActions.shift();
-  
+
   // 更新显示
   updateStatus();
   updateSubProblems();
-  
+
   // 触发随机事件
   triggerRandomEvent(problemIndex, 0);
 }
