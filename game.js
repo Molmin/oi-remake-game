@@ -428,6 +428,16 @@ let gameLog = [];
 
 // 添加商品价格增长配置
 const shopPriceIncrements = {
+  cheat: {
+    "思维提升": 1,
+    "代码提升": 1,
+    "细心提升": 1,
+    "随机提升": 1,
+    "心态恢复": 1,
+    "全面提升": 1,
+    "速度提升": 1,
+    "心理素质提升": 1
+  },
   easy: {
     "思维提升": 100,
     "代码提升": 100,
@@ -1415,13 +1425,15 @@ function updateStatus() {
     document.getElementById("current-problem").textContent = "未开始";
   }
 
-const difficultyNames = {
+  const difficultyNames = {
+    'cheat': '开挂',
     'easy': '简单',
     'normal': '普通',
     'hard': '困难',
     'expert': '专家'
   };
   const difficultyColors = {
+    'cheat': 'brown',    // 绿色
     'easy': '#28a745',    // 绿色
     'normal': '#17a2b8',  // 青色
     'hard': '#ffc107',    // 黄色
@@ -1679,6 +1691,9 @@ function calculateThinkSuccessRate(subProblem) {
   // 根据难度调整基础成功率
   let baseProb;
   switch(gameDifficulty) {
+    case 'cheat':
+      baseProb = 0.99; // 简单难度90%基础成功率
+      break;
     case 'easy':
       baseProb = 0.9; // 简单难度90%基础成功率
       break;
@@ -1711,6 +1726,9 @@ function calculateCodeSuccessRate(subProblem) {
   // 根据难度调整基础成功率
   let baseProb;
   switch(gameDifficulty) {
+    case 'cheat':
+      baseProb = 0.99; // 简单难度90%基础成功率
+      break;
     case 'easy':
       baseProb = 0.9; // 简单难度90%基础成功率
       break;
@@ -1742,6 +1760,9 @@ function calculateErrorRate(subProblem) {
   // 根据难度调整基础出错概率
   let baseProb;
   switch(gameDifficulty) {
+    case 'cheat':
+      baseProb = 0.01; // 简单难度10%基础出错概率
+      break;
     case 'easy':
       baseProb = 0.1; // 简单难度10%基础出错概率
       break;
@@ -1913,13 +1934,13 @@ function confirmAllocation() {
   }
 
   // 检查是否分配完所有知识点
-  if (knowledgeTotal < remainingPoints) {
+  if (knowledgeTotal < remainingPoints && gameDifficulty !== 'cheat') {
     alert("请分配完所有知识点！");
     return;
   }
 
   // 检查是否分配完所有能力点
-  if (abilityTotal < remainingAbilityPoints) {
+  if (abilityTotal < remainingAbilityPoints && gameDifficulty !== 'cheat') {
     alert("请分配完所有能力点！");
     return;
   }
@@ -3321,6 +3342,7 @@ function shuffleArray(array) {
 // 添加新的阶段转换处理函数
 function handlePhaseTransition() {
   const difficultyMultiplier = {
+    'cheat': 0.6,    // 简单难度分数线降低15%
     'easy': 0.85,    // 简单难度分数线降低15%
     'normal': 0.9,    // 普通难度分数线降低10%
     'hard': 1.0,    // 困难难度分数线保持不变
@@ -3673,6 +3695,7 @@ let purchasedItems = new Set();
 function calculateAward(contestType, score, prevScore = 0, prevScore2 = 0, prevScore3 = 0) {
   // 根据难度调整分数线
   const difficultyMultiplier = {
+    'cheat': 0.6,    // 简单难度分数线降低15%
     'easy': 0.85,    // 简单难度分数线降低15%
     'normal': 0.9,    // 普通难度分数线降低10%
     'hard': 1.0,    // 困难难度分数线保持不变
@@ -3915,6 +3938,14 @@ function startAdvancedMode(difficulty) {
 
   // 根据难度调整初始属性
   switch (difficulty) {
+    case 'cheat':
+      remainingPoints = 50; // 更多知识点
+      remainingAbilityPoints = 60; // 更多能力点
+      playerStats.determination = 10000; // 更多决心
+      mood = moodLimit; // 最高心态
+      extraMoodDrop = 0; // 额外心态下降值
+      currentShopPrices = getInitialShopPrices('cheat');
+      break;
     case 'easy':
       remainingPoints = 30; // 更多知识点
       remainingAbilityPoints = 5; // 更多能力点
@@ -4013,6 +4044,7 @@ function startAdvancedMode(difficulty) {
 
   // 记录难度到日志
   const difficultyNames = {
+    'cheat': '开挂',
     'easy': '简单',
     'normal': '普通',
     'hard': '困难',
@@ -4029,6 +4061,16 @@ function startAdvancedMode(difficulty) {
 // 添加获取初始商店价格的函数
 function getInitialShopPrices(difficulty) {
   const basePrices = {
+    cheat: {
+      "思维提升": 50,
+      "代码提升": 50,
+      "细心提升": 50,
+      "随机提升": 50,
+      "心态恢复": 75,
+      "全面提升": 300,
+      "速度提升": 250,
+      "心理素质提升": 250
+    },
     easy: {
       "思维提升": 200,
       "代码提升": 200,
@@ -4104,6 +4146,9 @@ function submitAnswerProblem(problemIndex) {
 
 
   switch(gameDifficulty) {
+    case 'cheat':
+      mean -= 0.5;
+      break;
     case 'easy':
       mean -= 1;
       break;
