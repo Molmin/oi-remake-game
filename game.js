@@ -1350,6 +1350,33 @@ const randomEvents = [
     },
     condition: (stats) => true, // 任何时候都可能触发
     probability: 0.01
+  },
+  {
+    name: "上厕所",
+    description: "上厕所选到了女厕所，豁然开朗！",
+    effect: (stats) => {
+      stats.mood = Math.min(moodLimit, stats.mood + 1);
+      return "心态值+1";
+    },
+    condition: (stats) => {
+      const recentActions = stats.lastActions.slice(-2);
+      return recentActions.every(action => action === 'think');
+    },
+    probability: 0.005
+  },
+  {
+    name: "做法假了",
+    description: "突然发现做法假了",
+    effect: (stats) => {
+      const diff = Math.floor(Math.random() * 3) + 1; // 随机-1到-3
+      stats.thinkProgress = Math.max(0, stats.thinkProgress - diff);
+      return `思考进度-${diff}`;
+    },
+    condition: (stats) => {
+      const recentActions = stats.lastActions.slice(-3);
+      return recentActions.every(action => action === 'think');
+    },
+    probability: 0.02
   }
 ];
 
