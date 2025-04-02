@@ -1028,9 +1028,9 @@ const eventSystem = {
           text: "阅读 Daniel_lele 的博客",
           nextEventProbability: {
             "看不懂": 0.1,
-            "学会Daniel_lele": 0.1,
-            "学会郑选": 0.45,
-            "学不会郑选": 0.45
+            "学会Daniel_lele": 0.2,
+            "学会郑选": 0.35,
+            "学不会郑选": 0.35
           }
         },
         {
