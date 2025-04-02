@@ -940,7 +940,7 @@ const eventSystem = {
       title: "看到郑选",
       description: "你不幸打开了郑选",
       options: [
-        { text: "看到郑选破防了", effects: { mood: 3 } },
+        { text: "看到郑选破防了", effects: { mood: -3 } },
       ],
     },
     "学会adamant": {
