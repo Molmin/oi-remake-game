@@ -908,7 +908,6 @@ const eventSystem = {
         { text: "得到提升", effects: { thinking: 3, gametheory: 6 } },
         { text: "得到提升", effects: { thinking: 3, graph: 4 } },
       ],
-
       optionsToShow: 1
     },
     "学会dXqwq": {
@@ -918,6 +917,32 @@ const eventSystem = {
         { text: "得到提升", effects: { ds: 4 } },
       ],
     },
+    "学会Daniel_lele": {
+      title: "学会Daniel_lele",
+      description: "你阅读了Daniel_lele的题解，学会了一些东西",
+      options: [
+        { text: "得到提升", effects: { thinking: 2 } },
+        { text: "得到提升", effects: { thinking: 1, dp: 2 } },
+        { text: "得到提升", effects: { thinking: 1, graph: 2 } },
+        { text: "得到提升", effects: { thinking: 1, numbertheory: 2 } },
+        { text: "得到提升", effects: { thinking: 1, ds: 2 } },
+        { text: "得到提升", effects: { thinking: 1, construction: 2 } },
+      ],
+    },
+    "学会郑选": {
+      title: "学会郑选",
+      description: "你阅读了郑选后，你学会了说批话，你觉得这是一种很好的交流方式。",
+      options: [
+        { text: "得到提升", effects: { mood: 3 } },
+      ],
+    },
+    "学不会郑选": {
+      title: "看到郑选",
+      description: "你不幸打开了郑选",
+      options: [
+        { text: "看到郑选破防了", effects: { mood: 3 } },
+      ],
+    },
     "学会adamant": {
       title: "学会adamant",
       description: "你阅读了adamant的博客，学到了一些奇奇怪怪的东西。",
@@ -925,10 +950,7 @@ const eventSystem = {
         { text: "得到提升", effects: { numbertheory: 4 } },
         { text: "得到提升", effects: { linearalgebra: 4 } },
         { text: "得到提升", effects: { polynomial: 4 } },
-
-
       ],
-
       optionsToShow: 1
     },
     "学会号妈培训": {
@@ -1000,6 +1022,15 @@ const eventSystem = {
           nextEventProbability: {
             "看不懂": 0.3,
             "学会zhoukangyang": 0.7
+          }
+        },
+        {
+          text: "阅读 Daniel_lele 的博客",
+          nextEventProbability: {
+            "看不懂": 0.1,
+            "学会Daniel_lele": 0.1,
+            "学会郑选": 0.45,
+            "学不会郑选": 0.45
           }
         },
         {
